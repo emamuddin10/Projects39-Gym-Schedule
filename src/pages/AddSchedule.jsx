@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
+import Swal from "sweetalert2";
 
 // 12-hour format time converter function
 const formatTime12Hour = (time) => {
@@ -26,31 +27,57 @@ const AddSchedule = () => {
     const formattedTime = formatTime12Hour(selectTime);
     const title = form.title.value;
     const day = form.day.value;
-
-    console.log("Gym Schedule:", { title, formattedDate, day, formattedTime });
+    
+    const scheduleData = {
+      title:title,
+      date:formattedDate,
+      day:day,
+      time:formattedTime
+    }
+    console.log("Gym Schedule:", scheduleData);
     alert(`Schedule Added!\nTitle: ${title}\nDate: ${formattedDate}\nDay: ${day}\nTime: ${formattedTime}`);
+
+    fetch('http://localhost:5000/schedule',{
+      method:'POST',
+      headers:{
+       'content-type':'application/json'
+     },
+      body:JSON.stringify(scheduleData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      form.reset()
+      if(data.insertedId){
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Schedule has been added!",
+          icon: "success"
+        });
+      }
+    })
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6">Add Gym Schedule</h2>
-        <form onSubmit={handleAddSchedule} className="space-y-4">
+    <div className="flex justify-center items-center min-h-screen bg-pink-300">
+      <div className="bg-gray-200 p-8 rounded-lg shadow-lg w-full max-w-5xl">
+        <h2 className="text-3xl font-bold text-center mb-6">Add Gym Schedule</h2>
+        <form onSubmit={handleAddSchedule} className="grid grid-cols-2 gap-4">
           {/* Title */}
-          <div>
+          <div className="col-span-1">
             <label className="block font-semibold mb-1">Title</label>
             <input
               type="text"
               name="title"
               required
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-              placeholder="Enter title"
+              placeholder="Title"
             />
           </div>
 
           {/* Date */}
-          <div className="w-full">
-            <label className="block  font-semibold mb-1">Date</label>
+          <div className="col-span-1">
+            <label className="block font-semibold mb-1">Day</label>
             <DatePicker
               selected={startDate}
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
@@ -59,7 +86,7 @@ const AddSchedule = () => {
           </div>
 
           {/* Day */}
-          <div>
+          <div className="col-span-1">
             <label className="block font-semibold mb-1">Day</label>
             <select
               name="day"
@@ -74,7 +101,7 @@ const AddSchedule = () => {
           </div>
 
           {/* Time */}
-          <div>
+          <div className="col-span-1">
             <label className="block font-semibold mb-1">Time</label>
             <TimePicker
               onChange={setSelectTime}
@@ -84,9 +111,11 @@ const AddSchedule = () => {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="w-full bg-pink-500 text-white py-2 rounded-md font-semibold hover:bg-pink-600 transition duration-200">
-            Add Schedule
-          </button>
+          <div className="col-span-2">
+            <button type="submit" className="w-full bg-pink-700 text-white py-2 rounded-md font-semibold hover:bg-pink-800 transition duration-200">
+              Add Schedule
+            </button>
+          </div>
         </form>
       </div>
     </div>
