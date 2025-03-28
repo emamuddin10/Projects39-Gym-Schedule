@@ -5,6 +5,9 @@ import AddSchedule from "../pages/AddSchedule";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import ScheduleTable from "../pages/ScheduleTable";
+import Schedule from "../pages/Schedule";
+import UpdateSchedule from "../pages/UpdateSchedule";
 
 
 const router =createBrowserRouter([
@@ -20,6 +23,16 @@ const router =createBrowserRouter([
         {
           path:"addSchedule",
           element:<AddSchedule></AddSchedule>
+        },
+        {
+          path:'allSchedule',
+          element:<Schedule></Schedule>,
+          loader:()=> fetch('http://localhost:5000/schedule')
+        },
+        {
+          path:'/update/:id',
+          element:<UpdateSchedule></UpdateSchedule>,
+          loader:({params})=>fetch(`http://localhost:5000/schedule/${params.id}`)
         }
       ]
     },
