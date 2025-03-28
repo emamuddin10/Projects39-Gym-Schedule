@@ -35,8 +35,7 @@ const AddSchedule = () => {
       time:formattedTime
     }
     console.log("Gym Schedule:", scheduleData);
-    alert(`Schedule Added!\nTitle: ${title}\nDate: ${formattedDate}\nDay: ${day}\nTime: ${formattedTime}`);
-
+   
     fetch('http://localhost:5000/schedule',{
       method:'POST',
       headers:{
