@@ -44,7 +44,7 @@ const UpdateSchedule = () => {
     console.log("Updated Gym Schedule:", updatedScheduleData);
 
     fetch(`http://localhost:5000/schedule/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
@@ -76,7 +76,7 @@ const UpdateSchedule = () => {
         });
       });
   };
-
+console.log(title)
   return (
     <div className="flex justify-center items-center min-h-screen bg-pink-300">
       <div className="bg-gray-200 p-8 rounded-lg shadow-lg w-full max-w-5xl">
@@ -136,7 +136,7 @@ const UpdateSchedule = () => {
 
           {/* Submit Button */}
           <div className="col-span-2">
-            <button type="submit" className="w-full bg-pink-700 text-white py-2 rounded-md font-semibold hover:bg-pink-800 transition duration-200">
+            <button type="submit" className="w-full bg-pink-500 text-white py-2 rounded-md font-semibold hover:bg-pink-800 transition duration-200">
               Update Schedule
             </button>
           </div>
