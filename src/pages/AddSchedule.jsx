@@ -32,7 +32,8 @@ const AddSchedule = () => {
       title:title,
       date:formattedDate,
       day:day,
-      time:formattedTime
+      time:formattedTime,
+      isCompleted:false
     }
     console.log("Gym Schedule:", scheduleData);
    
