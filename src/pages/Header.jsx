@@ -28,14 +28,14 @@ const Header = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li><Link to='/'>Home</Link></li>
-            <li><Link to='/AddSchedule'>AddSchedule</Link></li>
-            <li><Link to='/AllSchedule'>AllSchedule</Link></li>
+            <li><Link to='/addSchedule'>AddSchedule</Link></li>
+            <li><Link to='/allSchedule'>AllSchedule</Link></li>
             <li><Link to='/singIn'>Sing In</Link></li>
             <li><Link to='/SingUp'>Sign Up</Link></li>
             
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl"><span className="text-pink-500">Gym</span> Schedule</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
